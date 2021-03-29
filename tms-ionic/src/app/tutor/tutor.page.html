@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>tutor</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <ion-avatar style="width: 150px; height: 150px">
+      <img
+        src="https://preview.keenthemes.com/metronic-v4/theme/assets/pages/media/profile/profile_user.jpg"
+      />
+    </ion-avatar>
+
+    <p>{{description}}</p>
+  </div>
+
+  <div>
+    <h2>Subjects</h2>
+    <ion-list>
+      <ion-card *ngFor="let subject of subjects">
+        <div style="display: flex; justify-content: space-between">
+          <ion-icon name="book-outline"></ion-icon>
+          <span>{{subject.title}}</span>
+          <span>Level {{subject.level}}</span>
+        </div>
+      </ion-card>
+    </ion-list>
+  </div>
+</ion-content>
