@@ -16,24 +16,49 @@ export class PastSessionsPage implements OnInit {
   pastSessions: Session[];
 
   constructor() {
-    this.pastSessions = [];
-    this.loadPastSessions();
+    this.pastSessions = [
+      {
+        date: 'Tue - Nov 10',
+        time: '4:00PM - 6:00PM',
+        subjects: ['Math', 'English'],
+        location: 'George Brown College',
+      },
+      {
+        date: 'Tue - Nov 17',
+        time: '4:00PM - 6:00PM',
+        subjects: ['Math'],
+        location: 'George Brown College',
+      },
+      {
+        date: 'Tue - Nov 24',
+        time: '4:00PM - 6:00PM',
+        subjects: ['English'],
+        location: 'George Brown College',
+      },
+      {
+        date: 'Tue - Nov 31',
+        time: '4:00PM - 6:00PM',
+        subjects: ['Math', 'English'],
+        location: 'George Brown College',
+      },
+    ];
+    // this.loadPastSessions();
   }
 
   ngOnInit() {}
 
-  loadPastSessions(): void {
-    const dummySessions: Session = {
-      date: 'Tue - Nov 10',
-      time: '4:00PM - 6:00PM',
-      subjects: ['Math', 'English'],
-      location: 'George Brown College',
-    };
+  // loadPastSessions(): void {
+  //   const dummySessions: Session = {
+  //     date: 'Tue - Nov 10',
+  //     time: '4:00PM - 6:00PM',
+  //     subjects: ['Math', 'English'],
+  //     location: 'George Brown College',
+  //   };
 
-    for (let i = 0; i < 10; i++) {
-      this.pastSessions.push(dummySessions);
-    }
-  }
+  //   for (let i = 0; i < 10; i++) {
+  //     this.pastSessions.push(dummySessions);
+  //   }
+  // }
 
   debugger(val: any): void {
     console.log(val);
