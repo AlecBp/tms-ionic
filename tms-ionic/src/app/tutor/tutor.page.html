@@ -27,10 +27,10 @@
         *ngFor="let subject of subjects"
         style="padding: 0.75rem"
       >
-        <div style="display: flex; justify-content: space-between">
-          <ion-icon name="book-outline"></ion-icon>
-          <span>{{subject.title}}</span>
-          <span>Level {{subject.level}}</span>
+        <div style="display: flex; justify-content: space-between; align-items: center">
+          <ion-icon name="book-outline" style="font-size: 2rem"></ion-icon>
+          <h5>{{subject.title}}</h5>
+          <h5>Level {{subject.level}}</h5>
         </div>
       </ion-card>
     </ion-list>
