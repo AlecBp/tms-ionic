@@ -32,14 +32,22 @@
 
   <div>
     <h2>Students</h2>
+    <ion-list>
+      <ion-card *ngFor="let student of students">
+        <div style="display: flex; justify-content: space-between">
+          <ion-checkbox color="danger"></ion-checkbox>
+          <span>{{student}}</span>
+        </div>
+      </ion-card>
+    </ion-list>
+  </div>
 
-  <ion-list>
-    <ion-card *ngFor="let student of students" >
-      <div style="display: flex; justify-content: space-between">
-        <span>[] </span>
-        <span>{{student}}</span>
-      </div>
-    </ion-card>
-  </ion-list>
+  <div>
+    <h2>Notes</h2>
+    <ion-textarea
+      rows="6"
+      cols="20"
+      placeholder="Enter any notes here..."
+    ></ion-textarea>
   </div>
 </ion-content>
