@@ -10,7 +10,7 @@
     <ion-button color="light" [routerLink]="['/past-sessions']"
       >SEE PAST SESSIONS</ion-button
     >
-    <ion-button color="light" [routerLink]="['/login']">LOG OUT</ion-button>
+    <ion-button color="light" (click)="handleLoggedOut()" [routerLink]="['/login']">LOG OUT</ion-button>
   </button-group>
 </ion-header>
 
