@@ -49,7 +49,6 @@
   <div class="box">
     <h2>Tutor</h2>
     <ion-card
-      *ngFor="let student of students"
       class="slim-card"
       [routerLink]="['/tutor']"
     >
@@ -87,7 +86,7 @@
       placeholder="Enter any notes here..."
     ></ion-textarea>
     <div style="display: flex; justify-content: center">
-      <ion-button color="success">SAVE CHANGES</ion-button>
+      <ion-button color="success" (click)="handleNoteSubmit()">SAVE CHANGES</ion-button>
     </div>
   </div>
 </ion-content>

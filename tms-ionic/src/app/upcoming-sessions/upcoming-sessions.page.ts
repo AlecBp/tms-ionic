@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 // import { Session } from '../types';
-import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
+
 export interface Session {
   date: string;
   time: string;
@@ -15,7 +16,7 @@ export interface Session {
 export class UpcomingSessionsPage implements OnInit {
   upcomingSessions: Session[];
 
-  constructor() {
+  constructor(public toastController: ToastController) {
     this.upcomingSessions = [];
     this.loadUpcomingSessions();
   }
@@ -37,5 +38,15 @@ export class UpcomingSessionsPage implements OnInit {
 
   debugger(val: any): void {
     console.log(val);
+  }
+
+  async handleLoggedOut() {
+    const toast = await this.toastController.create({
+      message: 'Successfully Logged Out',
+      duration: 2000,
+      color: "success",
+      position: "top"
+    });
+    toast.present();
   }
 }
