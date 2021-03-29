@@ -3,12 +3,12 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>tutor</ion-title>
+    <ion-title>Tutor Profile</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="tutor-avatar">
+  <div class="tutor-avatar ion-margin-top">
     <ion-avatar style="width: 150px; height: 150px">
       <img
         src="https://preview.keenthemes.com/metronic-v4/theme/assets/pages/media/profile/profile_user.jpg"
@@ -20,19 +20,29 @@
     <p>{{description}}</p>
   </div>
 
-  <div>
+  <div class="box">
     <h2>Subjects</h2>
-    <ion-list>
-      <ion-card
-        *ngFor="let subject of subjects"
-        style="padding: 0.75rem"
+
+    <ion-card
+      *ngFor="let subject of subjects"
+      style="
+        margin-right: 0;
+        margin-left: 0;
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+      "
+    >
+      <div
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        "
       >
-        <div style="display: flex; justify-content: space-between; align-items: center">
-          <ion-icon name="book-outline" style="font-size: 2rem"></ion-icon>
-          <h5>{{subject.title}}</h5>
-          <h5>Level {{subject.level}}</h5>
-        </div>
-      </ion-card>
-    </ion-list>
+        <ion-icon name="book-outline" style="font-size: 2rem"></ion-icon>
+        <h5>{{subject.title}}</h5>
+        <h6>Grade level: {{subject.level}}</h6>
+      </div>
+    </ion-card>
   </div>
 </ion-content>
