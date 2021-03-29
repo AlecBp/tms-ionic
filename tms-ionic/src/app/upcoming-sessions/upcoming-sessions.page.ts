@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 export interface Session {
   date: string;
   time: string;
-  subejcts: string[];
+  subjects: string[];
   location: string;
 }
 @Component({
@@ -26,7 +26,7 @@ export class UpcomingSessionsPage implements OnInit {
     const dummySessions: Session = {
       date: 'Tue - Nov 10',
       time: '4:00PM - 6:00PM',
-      subejcts: ['Math', 'English'],
+      subjects: ['Math', 'English'],
       location: 'George Brown College',
     };
 
