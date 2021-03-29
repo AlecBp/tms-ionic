@@ -41,7 +41,7 @@
 
   <div class="box">
     <h2>Tutor</h2>
-    <ion-card *ngFor="let student of students" class="slim-card">
+    <ion-card *ngFor="let student of students" class="slim-card" [routerLink]="['/tutor']">
       <ion-avatar style="width: 35px; height: 35px; margin: 0 0.75rem">
         <img
           src="https://preview.keenthemes.com/metronic-v4/theme/assets/pages/media/profile/profile_user.jpg"
