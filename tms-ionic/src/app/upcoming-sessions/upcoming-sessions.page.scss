@@ -1,0 +1,23 @@
+.session-list {
+  padding: 0;
+}
+
+.session-card {
+  border: 1px solid black;
+  padding: 0.5rem;
+  transition: 0.2s all ease-in-out;
+  &:hover {
+    color: white;
+    background-color: #424242;
+  }
+}
+
+.subjects-box {
+  margin: 0.5rem auto;
+}
+
+.slim-chip {
+  padding: 0 0.4rem !important;
+  margin: 0 0.2rem !important;
+  height: 1.5rem;
+}
