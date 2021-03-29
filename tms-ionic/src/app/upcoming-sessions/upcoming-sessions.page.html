@@ -2,8 +2,43 @@
   <ion-toolbar>
     <ion-title>upcomingSessions</ion-title>
   </ion-toolbar>
+
+  <button-group style="display: flex; justify-content: space-between">
+    <ion-button>
+      See past sessions
+    </ion-button>
+
+    <ion-button>
+      Log out
+    </ion-button>
+  </button-group>
+
 </ion-header>
 
 <ion-content>
+  <!-- {{debugger(upcomingSessions)}} -->
 
+  <ion-list>
+    <!-- <ion-item *ngFor="let session of upcomingSessions"> -->
+    <!-- <p>{{note.id}} / {{note.title}}</p>
+      <ion-icon (click)="deleteNote(note.id)" name="trash"></ion-icon> -->
+
+    <ion-card *ngFor="let session of upcomingSessions">
+      <div style="display: flex; justify-content: space-between">
+        <span>date: {{session.date}}</span>
+        <span>time: {{session.time}}</span>
+      </div>
+
+      <div style="display: flex;">
+        subjects: 
+        <div *ngFor="let subject of session.subejcts">
+          <span>{{subject}}</span>
+        </div>
+      </div>
+
+      <div>location: {{session.location}}</div>
+    </ion-card>
+
+    <!-- </ion-item> -->
+  </ion-list>
 </ion-content>
