@@ -19,11 +19,14 @@
   <div class="description-container">
     <p>{{description}}</p>
   </div>
-  
+
   <div>
     <h2>Subjects</h2>
     <ion-list>
-      <ion-card *ngFor="let subject of subjects">
+      <ion-card
+        *ngFor="let subject of subjects"
+        style="padding: 0.75rem"
+      >
         <div style="display: flex; justify-content: space-between">
           <ion-icon name="book-outline"></ion-icon>
           <span>{{subject.title}}</span>
