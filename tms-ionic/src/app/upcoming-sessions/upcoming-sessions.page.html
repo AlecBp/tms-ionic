@@ -7,26 +7,22 @@
     class="ion-margin-top"
     style="display: flex; justify-content: space-between"
   >
-    <ion-button color="light" [routerLink]="['/past-sessions']">SEE PAST SESSIONS</ion-button>
+    <ion-button color="light" [routerLink]="['/past-sessions']"
+      >SEE PAST SESSIONS</ion-button
+    >
     <ion-button color="light" [routerLink]="['/login']">LOG OUT</ion-button>
   </button-group>
 </ion-header>
 
 <ion-content>
-  <!-- {{debugger(upcomingSessions)}} -->
-
   <ion-list class="session-list">
-    <!-- <ion-item *ngFor="let session of upcomingSessions"> -->
-    <!-- <p>{{note.id}} / {{note.title}}</p>
-      <ion-icon (click)="deleteNote(note.id)" name="trash"></ion-icon> -->
-
-    <ion-card class="session-card" *ngFor="let session of upcomingSessions" [routerLink]="['/session']">
+    <ion-card
+      class="session-card"
+      *ngFor="let session of upcomingSessions"
+      [routerLink]="['/session']"
+    >
       <div style="display: flex; justify-content: space-between">
         <ion-grid style="margin: 0; padding: 0">
-          <!-- <ion-row>
-            <ion-col style="margin: 0; padding: 0">Date</ion-col>
-            <ion-col style="margin: 0; padding: 0">Time</ion-col>
-          </ion-row> -->
           <ion-row>
             <ion-col style="margin: 0; padding: 0"
               ><span>{{session.date}}</span></ion-col
@@ -35,8 +31,6 @@
               ><span>{{session.time}}</span></ion-col
             >
           </ion-row>
-          <!-- <span>Date: {{session.date}}</span>
-          <span>Time: {{session.time}}</span> -->
         </ion-grid>
       </div>
 
@@ -49,7 +43,5 @@
 
       <div>Location: {{session.location}}</div>
     </ion-card>
-
-    <!-- </ion-item> -->
   </ion-list>
 </ion-content>
