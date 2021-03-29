@@ -8,22 +8,34 @@
 </ion-header>
 
 <ion-content>
-  <ion-card>
+  <ion-card class="session-card">
     <div style="display: flex; justify-content: space-between">
-      <span>date: Tue-Nov 10</span>
-      <span>time: 4:00 PM - 6:00PM</span>
+      <ion-grid style="margin: 0; padding: 0">
+        <ion-row>
+          <ion-col style="margin: 0; padding: 0">Date:</ion-col>
+          <ion-col style="margin: 0; padding: 0">Time:</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col style="margin: 0; padding: 0"
+            ><span>Tue - Nov 10</span></ion-col
+          >
+          <ion-col style="margin: 0; padding: 0">
+            <span>4:00PM - 6:00PM</span></ion-col
+          >
+        </ion-row>
+      </ion-grid>
     </div>
 
-    <div>location: George Brown College</div>
-
-    <div style="display: flex">
-      subjects:
+    <div class="subjects-box" style="display: flex; align-items: center">
+      Subjects:
       <div>
-        <span>Math</span>
+        <ion-chip class="slim-chip" [disabled]="true">Math</ion-chip>
+        <ion-chip class="slim-chip" [disabled]="true">English</ion-chip>
       </div>
     </div>
 
-    <p>There are 4 students in this session</p>
+    <div>Location: George Brown College</div>
+    <p>There are 5 students in this session</p>
   </ion-card>
 
   <div>
