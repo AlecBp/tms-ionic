@@ -5,6 +5,22 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'forgot-password',
+    loadChildren: () => import('./forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
+  },
+  {
+    path: 'upcoming-sessions',
+    loadChildren: () => import('./upcoming-sessions/upcoming-sessions.module').then( m => m.UpcomingSessionsPageModule)
+  },
+  {
+    path: 'past-sessions',
+    loadChildren: () => import('./past-sessions/past-sessions.module').then( m => m.PastSessionsPageModule)
   }
 ];
 @NgModule({
