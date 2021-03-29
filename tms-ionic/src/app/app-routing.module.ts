@@ -21,6 +21,10 @@ const routes: Routes = [
   {
     path: 'past-sessions',
     loadChildren: () => import('./past-sessions/past-sessions.module').then( m => m.PastSessionsPageModule)
+  },
+  {
+    path: 'session',
+    loadChildren: () => import('./session/session.module').then( m => m.SessionPageModule)
   }
 ];
 @NgModule({

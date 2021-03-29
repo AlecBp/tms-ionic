@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>session</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <div style="display: flex; justify-content: space-between">
+      <span>date: Tue-Nov 10</span>
+      <span>time: 4:00 PM - 6:00PM</span>
+    </div>
+
+    <div>location: George Brown College</div>
+
+    <div style="display: flex">
+      subjects:
+      <div>
+        <span>Math</span>
+      </div>
+    </div>
+
+    <p>There are 4 students in this session</p>
+  </ion-card>
+
+  <div>
+    <h2>Tutor</h2>
+  </div>
+
+  <div>
+    <h2>Students</h2>
+
+  <ion-list>
+    <ion-card *ngFor="let student of students" >
+      <div style="display: flex; justify-content: space-between">
+        <span>[] </span>
+        <span>{{student}}</span>
+      </div>
+    </ion-card>
+  </ion-list>
+  </div>
+</ion-content>

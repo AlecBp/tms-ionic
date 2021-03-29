@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
-interface Session {
+// import { Session } from '../types';
+import { Router } from '@angular/router';
+export interface Session {
   date: string;
   time: string;
   subejcts: string[];
