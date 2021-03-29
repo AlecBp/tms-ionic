@@ -1,0 +1,7 @@
+{
+  "name": "tms-ionic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
