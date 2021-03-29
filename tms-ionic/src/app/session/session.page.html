@@ -9,7 +9,14 @@
 
 <ion-content>
   <ion-card class="session-card">
-    <div style="display: flex; justify-content: space-between">
+    <div
+      style="
+        display: flex;
+        justify-content: space-between;
+        margin: 0;
+        padding: 0;
+      "
+    >
       <ion-grid style="margin: 0; padding: 0">
         <ion-row class="extra-margin">
           <!-- <ion-col style="margin: 0; padding: 0">Date:</ion-col> -->
@@ -41,19 +48,25 @@
 
   <div class="box">
     <h2>Tutor</h2>
-    <ion-card *ngFor="let student of students" class="slim-card" [routerLink]="['/tutor']">
-      <ion-avatar style="width: 35px; height: 35px; margin: 0 0.75rem">
-        <img
-          src="https://preview.keenthemes.com/metronic-v4/theme/assets/pages/media/profile/profile_user.jpg"
-        />
-      </ion-avatar>
-      <h5>{{tutor}}</h5>
+    <ion-card
+      *ngFor="let student of students"
+      class="slim-card"
+      [routerLink]="['/tutor']"
+    >
+      <div style="display: flex; align-items: center">
+        <ion-avatar style="width: 35px; height: 35px; margin: 0 0.75rem">
+          <img
+            src="https://preview.keenthemes.com/metronic-v4/theme/assets/pages/media/profile/profile_user.jpg"
+          />
+        </ion-avatar>
+
+        <h5>{{tutor}}</h5>
+      </div>
     </ion-card>
   </div>
 
   <div class="box">
     <h2>Students</h2>
-
     <ion-card
       class="slim-card"
       *ngFor="let student of students"
