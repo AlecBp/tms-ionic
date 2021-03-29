@@ -40,6 +40,15 @@
 
   <div>
     <h2>Tutor</h2>
+
+    <ion-card *ngFor="let student of students" style="display: flex">
+      <ion-avatar style="width: 45px; height: 45px">
+        <img
+          src="https://preview.keenthemes.com/metronic-v4/theme/assets/pages/media/profile/profile_user.jpg"
+        />
+      </ion-avatar>
+      <h3>{{tutor}}</h3>
+    </ion-card>
   </div>
 
   <div>
