@@ -1,12 +1,54 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
+<ion-header class="ion-margin-bottom">
+  <ion-toolbar
+    ><ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>pastSessions</ion-title>
+    <ion-title>Past Sessions</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <!-- {{debugger(upcomingSessions)}} -->
 
+  <ion-list class="session-list">
+    <!-- <ion-item *ngFor="let session of upcomingSessions"> -->
+    <!-- <p>{{note.id}} / {{note.title}}</p>
+      <ion-icon (click)="deleteNote(note.id)" name="trash"></ion-icon> -->
+
+    <ion-card
+      class="session-card"
+      *ngFor="let session of pastSessions"
+      [routerLink]="['/session']"
+    >
+      <div style="display: flex; justify-content: space-between">
+        <ion-grid style="margin: 0; padding: 0">
+          <!-- <ion-row>
+            <ion-col style="margin: 0; padding: 0">Date</ion-col>
+            <ion-col style="margin: 0; padding: 0">Time</ion-col>
+          </ion-row> -->
+          <ion-row>
+            <ion-col style="margin: 0; padding: 0"
+              ><span>{{session.date}}</span></ion-col
+            >
+            <ion-col style="margin: 0; padding: 0"
+              ><span>{{session.time}}</span></ion-col
+            >
+          </ion-row>
+          <!-- <span>Date: {{session.date}}</span>
+          <span>Time: {{session.time}}</span> -->
+        </ion-grid>
+      </div>
+
+      <div class="subjects-box" style="display: flex; align-items: center">
+        Subjects:
+        <div *ngFor="let subject of session.subjects">
+          <ion-chip class="slim-chip" [disabled]="true">{{subject}}</ion-chip>
+        </div>
+      </div>
+
+      <div>Location: {{session.location}}</div>
+    </ion-card>
+
+    <!-- </ion-item> -->
+  </ion-list>
 </ion-content>

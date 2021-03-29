@@ -1,14 +1,14 @@
 <ion-header class="ion-margin-bottom">
   <ion-toolbar>
-    <ion-title>Upcoming Session</ion-title>
+    <ion-title>Upcoming Sessions</ion-title>
   </ion-toolbar>
 
   <button-group
     class="ion-margin-top"
     style="display: flex; justify-content: space-between"
   >
-    <ion-button color="light">See past sessions</ion-button>
-    <ion-button color="light">Log out</ion-button>
+    <ion-button color="light" [routerLink]="['/past-sessions']">SEE PAST SESSIONS</ion-button>
+    <ion-button color="light" [routerLink]="['/login']">LOG OUT</ion-button>
   </button-group>
 </ion-header>
 

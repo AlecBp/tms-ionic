@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 export interface Session {
   date: string;
   time: string;
-  subejcts: string[];
+  subjects: string[];
   location: string;
 }
 @Component({
@@ -17,16 +17,16 @@ export class PastSessionsPage implements OnInit {
 
   constructor() {
     this.pastSessions = [];
-    this.loadUpcomingSessions();
+    this.loadPastSessions();
   }
 
   ngOnInit() {}
 
-  loadUpcomingSessions(): void {
+  loadPastSessions(): void {
     const dummySessions: Session = {
       date: 'Tue - Nov 10',
       time: '4:00PM - 6:00PM',
-      subejcts: ['Math', 'English'],
+      subjects: ['Math', 'English'],
       location: 'George Brown College',
     };
 
