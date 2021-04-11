@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ToastController } from '@ionic/angular';
-import { Router } from '@angular/router';
-import { Apollo, gql } from 'apollo-angular';
+import {Component, OnInit} from '@angular/core';
+import {ToastController} from '@ionic/angular';
+import {Router} from '@angular/router';
+import {Apollo, gql} from 'apollo-angular';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +20,6 @@ export class LoginPage {
   `;
 
 
-
   constructor(
     public toastController: ToastController,
     private router: Router,
@@ -32,8 +31,6 @@ export class LoginPage {
   }
 
   async handleLogIn() {
-    let toast: any = '';
-
     await this.apollo
       .mutate({
         mutation: this.LOGIN,
@@ -45,24 +42,24 @@ export class LoginPage {
         },
       })
       .subscribe(
-        ({ data }) => {
+        async ({data}) => {
           this.router.navigate(['/upcoming-sessions']);
-          // toast = this.toastController.create({
-          //   message: 'Successfully Logged in',
-          //   duration: 2000,
-          //   color: this.isLoggedIn ? 'success' : 'danger',
-          //   position: 'top',
-          // });
-          // toast.present();
+          const toast: any = await this.toastController.create({
+            message: 'Successfully Logged in',
+            duration: 2000,
+            color: 'success',
+            position: 'top',
+          });
+          toast.present();
         },
-        (error) => {
-          // toast = this.toastController.create({
-          //   message: 'LogIn failed',
-          //   duration: 2000,
-          //   color: this.isLoggedIn ? 'success' : 'danger',
-          //   position: 'top',
-          // });
-          // toast.present();
+        async (error) => {
+          const toast: any = await this.toastController.create({
+            message: 'LogIn failed',
+            duration: 2000,
+            color: 'danger',
+            position: 'top',
+          });
+          toast.present();
         }
       );
   }
