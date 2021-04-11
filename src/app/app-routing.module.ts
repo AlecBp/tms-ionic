@@ -30,11 +30,12 @@ const routes: Routes = [
     path: 'tutor',
     loadChildren: () => import('./tutor/tutor.module').then( m => m.TutorPageModule)
   }
-];
+]
+
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

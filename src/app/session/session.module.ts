@@ -9,12 +9,7 @@ import { SessionPageRoutingModule } from './session-routing.module';
 import { SessionPage } from './session.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    SessionPageRoutingModule
-  ],
-  declarations: [SessionPage]
+  imports: [CommonModule, FormsModule, IonicModule, SessionPageRoutingModule],
+  declarations: [SessionPage],
 })
 export class SessionPageModule {}
