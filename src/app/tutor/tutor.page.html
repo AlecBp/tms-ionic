@@ -3,11 +3,11 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title>Tutor Profile</ion-title>
+    <ion-title *ngIf="this.loading == false">{{this.tutor.fullName}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="this.loading == false">
   <div class="tutor-avatar ion-margin-top">
     <ion-avatar style="width: 150px; height: 150px">
       <img
@@ -17,14 +17,14 @@
   </div>
 
   <div class="description-container">
-    <p>{{description}}</p>
+    <p>{{tutor.bio}}</p>
   </div>
 
   <div class="box">
     <h2>Subjects</h2>
 
     <ion-card
-      *ngFor="let subject of subjects"
+      *ngFor="let subject of tutor.subjects"
       style="
         margin-right: 0;
         margin-left: 0;
@@ -40,8 +40,8 @@
         "
       >
         <ion-icon name="book-outline" style="font-size: 2rem"></ion-icon>
-        <h5>{{subject.title}}</h5>
-        <h6>Grade level: {{subject.level}}</h6>
+        <h5>{{subject.name}}</h5>
+        <h6>{{subject.level}}</h6>
       </div>
     </ion-card>
   </div>

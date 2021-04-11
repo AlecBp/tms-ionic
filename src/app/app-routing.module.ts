@@ -23,11 +23,11 @@ const routes: Routes = [
     loadChildren: () => import('./past-sessions/past-sessions.module').then( m => m.PastSessionsPageModule)
   },
   {
-    path: 'session',
+    path: 'session/:id',
     loadChildren: () => import('./session/session.module').then( m => m.SessionPageModule)
   },
   {
-    path: 'tutor',
+    path: 'tutor/:id',
     loadChildren: () => import('./tutor/tutor.module').then( m => m.TutorPageModule)
   }
 ]

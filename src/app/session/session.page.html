@@ -7,8 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <button (click)="debug()">CLICK</button>
+<ion-content *ngIf="this.loading == false">
   <ion-card class="session-card">
     <div
       style="
@@ -20,16 +19,14 @@
     >
       <ion-grid style="margin: 0; padding: 0">
         <ion-row class="extra-margin">
-          <!-- <ion-col style="margin: 0; padding: 0">Date:</ion-col> -->
-          <ion-col style="margin: 0; padding: 0"
-            ><span>Date: Tue - Nov 10</span></ion-col
-          >
+          <ion-col style="margin: 0; padding: 0">
+            <span>{{this.session?.date}}</span>
+          </ion-col>
         </ion-row>
         <ion-row class="extra-margin">
-          <!-- <ion-col style="margin: 0; padding: 0">Time:</ion-col> -->
           <ion-col style="margin: 0; padding: 0">
-            <span>Time: 4:00PM - 6:00PM</span></ion-col
-          >
+            <span>Time: {{this.session.time}}</span>
+          </ion-col>
         </ion-row>
       </ion-grid>
     </div>
@@ -37,21 +34,24 @@
     <div class="subjects-box" style="display: flex; align-items: center">
       Subjects:
       <div>
-        <ion-chip class="slim-chip" [disabled]="true">Math</ion-chip>
-        <ion-chip class="slim-chip" [disabled]="true">English</ion-chip>
+        <ion-chip
+          *ngFor="let subject of this.session.subjects"
+          class="slim-chip" [disabled]="true">
+          {{subject.name}}
+        </ion-chip>
       </div>
     </div>
 
-    <div>Location: George Brown College</div>
+    <div>Location: {{this.session.location}}</div>
   </ion-card>
 
-  <h6 class="ion-text-center">There are 5 students in this session</h6>
+  <h6 class="ion-text-center">There are {{this.session.attendance.length}} students in this session</h6>
 
   <div class="box">
     <h2>Tutor</h2>
     <ion-card
       class="slim-card"
-      [routerLink]="['/tutor']"
+      (click)="navigate(this.session.tutor.id)"
     >
       <div style="display: flex; align-items: center">
         <ion-avatar style="width: 35px; height: 35px; margin: 0 0.75rem">
@@ -60,7 +60,7 @@
           />
         </ion-avatar>
 
-        <h5>{{tutor}}</h5>
+        <h5>{{this.session.tutor.fullName}}</h5>
       </div>
     </ion-card>
   </div>
@@ -69,13 +69,13 @@
     <h2>Students</h2>
     <ion-card
       class="slim-card"
-      *ngFor="let student of students"
+      *ngFor="let attendance of this.session.attendance"
       style="padding-left: 0.75rem; padding-right: 0.75rem"
     >
       <div style="margin-right: 0.75rem">
-        <ion-checkbox color="danger"></ion-checkbox>
+        <ion-checkbox checked="false" color="danger"></ion-checkbox>
       </div>
-      <h5>{{student}}</h5>
+      <h5>{{attendance.student.fullName}}</h5>
     </ion-card>
   </div>
 

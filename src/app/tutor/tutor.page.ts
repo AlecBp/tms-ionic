@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Apollo, gql} from 'apollo-angular';
+import {ActivatedRoute} from '@angular/router';
 
 export interface Subject {
   title: string;
@@ -11,28 +13,48 @@ export interface Subject {
   styleUrls: ['./tutor.page.scss'],
 })
 export class TutorPage implements OnInit {
-  description: string;
+  userId: string;
+  tutor: string;
+  loading = true;
+  error: any;
 
-  subjects: Subject[];
+  USER = gql`
+    query user($id: ID!) {
+      user(id: $id) {
+        id
+        fullName
+        bio
+        subjects {
+          name
+          level
+        }
+      }
+    }
+  `;
 
-  constructor() {
-    this.description =
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores commodi ea adipisci porro similique, quam in sapiente deserunt expedita, illo aspernatur voluptatibus omnis ipsa corporis quisquam dicta? Exercitationem, debitis dolorum! Quod ipsam eius dolores excepturi. Incidunt dolorem quisquam molestias reprehenderit voluptatum, aperiam ut impedit mollitia, aspernatur, quod commodi doloremque. Consequuntur.';
-    this.subjects = [];
-    this.loadSubjects();
+  constructor(
+    private apollo: Apollo,
+    private route: ActivatedRoute
+  ) {
+    this.route.params.subscribe(p => {
+      this.userId = p.id;
+    });
   }
 
-  ngOnInit() {}
-
-  loadSubjects(): void {
-    const subejcts: Subject[] = [
-      { title: 'Math', level: 2 },
-      { title: 'Math', level: 3 },
-      { title: 'English', level: 1 },
-      { title: 'English', level: 2 },
-      { title: 'French', level: 1 },
-    ];
-
-    this.subjects = [...subejcts];
+  ngOnInit() {
+    this.apollo
+      .watchQuery({
+        query: this.USER,
+        variables: {
+          id: this.userId
+        }
+      })
+      .valueChanges.subscribe((result: any) => {
+      console.log(result?.data?.user);
+      this.tutor = result?.data?.user;
+      this.loading = result.loading;
+      this.error = result.error;
+    });
   }
+
 }

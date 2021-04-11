@@ -3,15 +3,15 @@
     <ion-title>Upcoming Sessions</ion-title>
   </ion-toolbar>
 
-  <button-group
+  <div
     class="ion-margin-top"
     style="display: flex; justify-content: space-between"
   >
     <ion-button color="light" [routerLink]="['/past-sessions']"
       >SEE PAST SESSIONS</ion-button
     >
-    <ion-button color="light" (click)="handleLoggedOut()" [routerLink]="['/login']">LOG OUT</ion-button>
-  </button-group>
+    <ion-button color="light" (click)="handleLoggedOut()">LOG OUT</ion-button>
+  </div>
 </ion-header>
 
 <ion-content>
@@ -19,7 +19,7 @@
     <ion-card
       class="session-card"
       *ngFor="let session of upcomingSessions"
-      [routerLink]="['/session']"
+      (click)="navigate(session.id)"
     >
       <div style="display: flex; justify-content: space-between">
         <ion-grid style="margin: 0; padding: 0">
@@ -37,7 +37,7 @@
       <div class="subjects-box" style="display: flex; align-items: center">
         Subjects:
         <div *ngFor="let subject of session.subjects">
-          <ion-chip class="slim-chip" [disabled]="true">{{subject}}</ion-chip>
+          <ion-chip class="slim-chip" [disabled]="true">{{subject.name}}</ion-chip>
         </div>
       </div>
 

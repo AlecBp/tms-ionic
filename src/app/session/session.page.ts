@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ToastController } from '@ionic/angular';
-import { Apollo, gql } from 'apollo-angular';
+import {Component, OnInit} from '@angular/core';
+import {ToastController} from '@ionic/angular';
+import {Apollo, gql} from 'apollo-angular';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Session} from '../type';
 
 @Component({
   selector: 'app-session',
@@ -8,50 +10,82 @@ import { Apollo, gql } from 'apollo-angular';
   styleUrls: ['./session.page.scss'],
 })
 export class SessionPage implements OnInit {
+  sessionId: string;
+
   tutor: string;
   students: string[];
-
-  sessions: any[];
+  session: Session;
   loading = true;
   error: any;
 
-  constructor(public toastController: ToastController, private apollo: Apollo) {
-    this.tutor = 'John Doe';
-    this.students = [];
-    this.loadStudents();
-  }
+  SESSION = gql`
+    query session($id: ID!) {
+      session(id: $id) {
+        id
+        tutor{
+          id
+          fullName
+        },
+        date
+        time
+        location
+        notes
+        subjects{
+          name
+          level
+        }
+        attendance {
+          isPresent
+          student {
+            id
+            fullName
+          }
+        }
+      }
+    }
+  `;
 
-  ngOnInit() {
-    // this.apollo
-    //   .watchQuery({
-    //     query: gql`
-    //       {
-    //         session(id: ) {
-    //           id
-    //           subjects {
-    //             name
-    //             level
-    //           }
-    //         }
-    //       }
-    //     `,
-    //   })
-    //   .valueChanges.subscribe((result: any) => {
-    //     this.sessions = result?.data?.sessions;
-    //     this.loading = result.loading;
-    //     this.error = result.error;
-    //   });
+  constructor(
+    public toastController: ToastController,
+    private apollo: Apollo,
+    private route: ActivatedRoute,
+    private router: Router,
+  ) {
+    this.route.params.subscribe(p => {
+      this.sessionId = p.id;
+    });
   }
 
   debug() {
-    console.log(this.sessions);
+    console.log(this.session.date);
   }
 
-  loadStudents() {
-    for (let i = 0; i < 5; i++) {
-      this.students.push('Abbey Edward');
-    }
+  navigate(id: string) {
+    this.router.navigate([`/tutor/${id}`]);
   }
+
+  ngOnInit() {
+    this.apollo
+      .watchQuery({
+        query: this.SESSION,
+        variables: {
+          id: this.sessionId
+        }
+      })
+      .valueChanges.subscribe((result: any) => {
+      console.log(result?.data?.session)
+      this.session = result?.data?.session;
+      this.loading = result.loading;
+      this.error = result.error;
+    });
+  }
+
+
+  // loadStudents() {
+  //   for (let i = 0; i < 5; i++) {
+  //     this.students.push('Abbey Edward');
+  //   }
+  // }
 
   async handleNoteSubmit() {
     const toast = await this.toastController.create({

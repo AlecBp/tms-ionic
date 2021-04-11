@@ -1,14 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 // import { Session } from '../types';
-import { ToastController } from '@ionic/angular';
+import {ToastController} from '@ionic/angular';
+import {Apollo, gql} from 'apollo-angular';
+import {NavigationExtras, Router} from '@angular/router';
+import {Session} from '../type';
 
-export interface Session {
-  id: number;
-  date: string;
-  time: string;
-  subjects: string[];
-  location: string;
-}
 @Component({
   selector: 'app-upcoming-sessions',
   templateUrl: './upcoming-sessions.page.html',
@@ -16,88 +12,74 @@ export interface Session {
 })
 export class UpcomingSessionsPage implements OnInit {
   upcomingSessions: Session[];
+  sessions: Session[];
+  loading = true;
+  error: any;
+  LOGOUT = gql`
+    mutation logout {
+      logout
+    }
+  `;
 
-  constructor(public toastController: ToastController) {
-    this.upcomingSessions = [
-      {
-        id: 1,
-        date: 'Tue - Mar 30',
-        time: '5:00PM - 6:00PM',
-        subjects: ['Math', 'English'],
-        location: 'George Brown College',
-      },
-      {
-        id: 2,
-        date: 'Tue - Apr 6',
-        time: '4:00PM - 6:00PM',
-        subjects: ['Math'],
-        location: 'George Brown College',
-      },
-      {
-        id: 3,
-        date: 'Tue - Apr 13',
-        time: '4:00PM - 5:00PM',
-        subjects: ['English'],
-        location: 'George Brown College',
-      },
-      {
-        id: 4,
-        date: 'Tue - Apr 20',
-        time: '4:00PM - 6:00PM',
-        subjects: ['Science'],
-        location: 'George Brown College',
-      },
-      {
-        id: 5,
-        date: 'Tue - Apr 27',
-        time: '5:00PM - 6:00PM',
-        subjects: ['French', 'English'],
-        location: 'George Brown College',
-      },
-      {
-        id: 6,
-        date: 'Tue - May 4',
-        time: '4:00PM - 6:00PM',
-        subjects: ['Math', 'English'],
-        location: 'George Brown College',
-      },
-      {
-        id: 7,
-        date: 'Tue - May 11',
-        time: '4:00PM - 5:00PM',
-        subjects: ['Math'],
-        location: 'George Brown College',
-      },
-    ];
-    // this.loadUpcomingSessions();
+  constructor(
+    public toastController: ToastController,
+    private router: Router,
+    private apollo: Apollo,
+  ) {}
+
+  async ngOnInit() {
+    this.apollo
+    .watchQuery({
+      query: gql`
+        {
+          sessions {
+            id
+            date
+            time
+            subjects {
+              name
+              level
+            }
+            location
+          }
+        }
+      `,
+    })
+    .valueChanges.subscribe((result: any) => {
+      this.upcomingSessions = result?.data?.sessions;
+      this.loading = result.loading;
+      this.error = result.error;
+    });
   }
-
-  ngOnInit() {}
-
-  // loadUpcomingSessions(): void {
-  //   const dummySessions: Session = {
-  //     date: 'Tue - Nov 10',
-  //     time: '4:00PM - 6:00PM',
-  //     subjects: ['Math', 'English'],
-  //     location: 'George Brown College',
-  //   };
-
-  //   for (let i = 0; i < 10; i++) {
-  //     this.upcomingSessions.push(dummySessions);
-  //   }
-  // }
 
   debugger(val: any): void {
     console.log(val);
   }
 
+  navigate(id: string) {
+    console.log(id);
+    this.router.navigate([`/session/${id}`]);
+  }
+
+
   async handleLoggedOut() {
-    const toast = await this.toastController.create({
-      message: 'Successfully Logged Out',
-      duration: 2000,
-      color: 'success',
-      position: 'top',
-    });
-    toast.present();
+    await this.apollo
+      .mutate({mutation: this.LOGOUT})
+      .subscribe(
+        async ({data}) => {
+          this.router.navigate(['/login']);
+
+          const toast = await this.toastController.create({
+            message: 'Successfully Logged Out',
+            duration: 2000,
+            color: 'success',
+            position: 'top',
+          });
+          toast.present();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   }
 }

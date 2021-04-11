@@ -14,18 +14,12 @@ export class LoginPage {
   isLoggedIn: boolean;
 
   LOGIN = gql`
-    mutation login($input: LoginInput!) {
-      login(input: $input) {
-        user {
-          id
-        }
-      }
+    mutation login($loginInput: LoginInput!) {
+      login(loginInput: $loginInput)
     }
   `;
 
-  user: any[];
-  loading = true;
-  error: any;
+
 
   constructor(
     public toastController: ToastController,
@@ -38,13 +32,13 @@ export class LoginPage {
   }
 
   async handleLogIn() {
-    let msg = '';
+    let toast: any = '';
 
-    this.apollo
+    await this.apollo
       .mutate({
         mutation: this.LOGIN,
         variables: {
-          input: {
+          loginInput: {
             email: this.email,
             password: this.password,
           },
@@ -52,32 +46,24 @@ export class LoginPage {
       })
       .subscribe(
         ({ data }) => {
-          console.log('got data', data);
+          this.router.navigate(['/upcoming-sessions']);
+          // toast = this.toastController.create({
+          //   message: 'Successfully Logged in',
+          //   duration: 2000,
+          //   color: this.isLoggedIn ? 'success' : 'danger',
+          //   position: 'top',
+          // });
+          // toast.present();
         },
         (error) => {
-          console.log('there was an error sending the query', error);
+          // toast = this.toastController.create({
+          //   message: 'LogIn failed',
+          //   duration: 2000,
+          //   color: this.isLoggedIn ? 'success' : 'danger',
+          //   position: 'top',
+          // });
+          // toast.present();
         }
       );
-
-    console.log(this.user);
-    if (this.email === 'johnDoe@gmail.com' && this.password === 'password') {
-      msg = 'Successfully Logged in';
-      this.isLoggedIn = true;
-    } else {
-      msg = 'LogIn failed';
-    }
-
-    const toast = await this.toastController.create({
-      message: msg,
-      duration: 2000,
-      color: this.isLoggedIn ? 'success' : 'danger',
-      position: 'top',
-    });
-
-    toast.present();
-
-    if (this.isLoggedIn) {
-      this.router.navigate(['/upcoming-sessions']);
-    }
   }
 }
